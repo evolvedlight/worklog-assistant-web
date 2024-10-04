@@ -5,7 +5,7 @@
       <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div class="flex lg:flex-1">
           <a href="#" class="-m-1.5 p-1.5">
-            <span class="sr-only">Worklog Assitant</span>
+            <span class="sr-only">Worklog Assistant</span>
             <img class="h-8 w-auto" src="/src/assets/logo.ico" alt="" />
           </a>
         </div>
@@ -66,8 +66,9 @@
             <div class="mx-auto max-w-2xl text-center">
               <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">JIRA Time Tracking without the
                 pain</h1>
-              <p class="mt-6 text-lg leading-8 text-gray-600">Stop logging work manually. Track your work as you do with
-                with the easy desktop app and ensure accuracy</p>
+              <p class="mt-6 text-lg leading-8 text-gray-600">
+                Stop logging work manually. Track your work as you do with the easy desktop app and ensure accuracy
+              </p>
               <div class="mt-10 flex items-center justify-center gap-x-6">
                 <a href="#"
                   class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get
@@ -126,8 +127,9 @@
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
           <div class="mx-auto max-w-4xl text-center">
             <h2 class="text-base font-semibold leading-7 text-indigo-600">Pricing</h2>
-            <p class="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">PPricing plans for teams or
-              business</p>
+            <p class="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+              Pricing plans for teams or businesses
+            </p>
           </div>
           <!-- <p class="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-gray-600">Distinctio et nulla eum soluta
             et neque labore quibusdam. Saepe et quasi iusto modi velit ut non voluptas in. Explicabo id ut laborum.</p> -->
