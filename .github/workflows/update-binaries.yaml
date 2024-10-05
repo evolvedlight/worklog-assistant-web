@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Get latest release info
         id: get_release
@@ -26,41 +28,22 @@ jobs:
               repo: 'WorklogAssistant',
             });
             core.setOutput('tag_name', latestRelease.tag_name);
-            core.setOutput('tarball_url', latestRelease.tarball_url);
+            core.setOutput('asset_url', latestRelease.assets[0].url);
+            core.setOutput('asset_filename', latestRelease.assets[0].name);
+            console.log(latestRelease);
+            console.log(latestRelease.assets[0].browser_download_url);
 
       - name: Download latest release
         run: |
-          curl -L "${{ steps.get_release.outputs.tarball_url }}" -o latest_release.tar.gz
-
-      - name: Extract file from release
-        run: |
-          mkdir release_contents
-          tar -xzf latest_release.tar.gz -C release_contents --strip-components=1
-          # Replace with the actual file paths
-          cp release_contents/path/to/file/in/release public/WorklogAssistant-windows-${{ steps.get_release.outputs.tag_name }}.zip
-
-      - name: Configure Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Commit changes
-        run: |
-          git checkout -b update-from-latest-release
-          git add public/WorklogAssistant-windows-${{ steps.get_release.outputs.tag_name }}.zip
-          git commit -m "Update Worklog Assistant binary to ${{ steps.get_release.outputs.tag_name }}"
-
-      - name: Push changes
-        uses: ad-m/github-push-action@v0.8.0
-        with:
-          branch: update-from-latest-release
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          curl -vv -L -H "Authorization: token ${{ secrets.WORKLOG_GITHUB_TOKEN }}" -H "Accept: application/octet-stream" "${{ steps.get_release.outputs.asset_url }}" -o "public/${{ steps.get_release.outputs.asset_filename }}"
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.WEB_GITHUB_TOKEN }}
           branch: update-from-latest-release-${{ steps.get_release.outputs.tag_name }}
+          base: main
           title: "Update Worklog Assistant to ${{ steps.get_release.outputs.tag_name }}"
           body: "Update Workflow Assistant to ${{ steps.get_release.outputs.tag_name }}"
           labels: "automated PR"
+          assignees: evolvedlight
